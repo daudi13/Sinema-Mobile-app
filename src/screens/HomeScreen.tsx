@@ -14,11 +14,13 @@ import {
   nowPlayingMovies,
   popularMovies,
   baseImagePath,
+  genre,
 } from '../api/apicalls';
 import {ScrollView} from 'react-native';
 import InputHeader from '../components/InputHeader';
 import CategroryHeader from '../components/CategroryHeader';
 import SubMovieCard from '../components/SubMovieCard';
+import MovieCard from '../components/MovieCard';
 
 const {width, height} = Dimensions.get('window');
 const getNowPlayingMovieList = async () => {
@@ -56,13 +58,25 @@ const getPopularMovieList = async () => {
   }
 };
 
+const getGenres = async () => {
+  try {
+    let res = await fetch(genre);
+    let data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.log('Something went wrong in getGenres Function', error);
+  }
+};
+
 const HomeScreen = ({navigation}: any) => {
   const [nowPlayingMoviesList, setNowPlayingMoviesList] =
     useState<any>(undefined);
   const [popularMoviesList, setPopularMoviesList] = useState<any>(undefined);
   const [upComingMoviesList, setUpcomingMoviesList] = useState<any>(undefined);
+  const [genresList, setGenresList] = useState<any>(undefined);
 
-  console.log(upComingMovies);
+  console;
 
   useEffect(() => {
     (async () => {
@@ -73,8 +87,10 @@ const HomeScreen = ({navigation}: any) => {
       setPopularMoviesList(tempPopularMovies.results);
 
       let tempUpcomingMovies = await getUpComingMovieList();
-
       setUpcomingMoviesList(tempUpcomingMovies.results);
+
+      let tempGenres = await getGenres();
+      setGenresList(tempGenres.genres);
     })();
   }, []);
   const searchMoviesFunc = () => {
@@ -118,18 +134,22 @@ const HomeScreen = ({navigation}: any) => {
         horizontal
         contentContainerStyle={styles.containerGap36}
         renderItem={({item, index}) => (
-          <SubMovieCard
+          <MovieCard
             shouldMarginatedAtEnd={true}
             cardFunction={() => {
               navigation.push('MovieDetails', {movieId: item.id});
             }}
             shouldMarginatedAround={true}
-            cardWidth={width / 3}
+            cardWidth={width * 0.7}
             isFirst={index == 0 ? true : false}
             isLast={index == nowPlayingMoviesList?.length - 1 ? true : false}
             key={index}
             title={item.original_title}
-            imagePath={baseImagePath('w342', item.poster_path)}
+            imagePath={baseImagePath('w780', item.poster_path)}
+            vote_average={item.vote_average}
+            vote_count={item.vote_count}
+            genreId={item.genre_ids}
+            genreList={genresList}
           />
         )}
       />

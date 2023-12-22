@@ -11,3 +11,4 @@ export const movieDetails = (id: number) =>
   `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
 export const movieCastDetails = (id: number) =>
   `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
+export const genre: string = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
