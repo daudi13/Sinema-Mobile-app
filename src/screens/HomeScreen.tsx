@@ -15,6 +15,7 @@ import {
   popularMovies,
   baseImagePath,
   genre,
+  searchMovies,
 } from '../api/apicalls';
 import {ScrollView} from 'react-native';
 import InputHeader from '../components/InputHeader';
@@ -35,6 +36,10 @@ const getNowPlayingMovieList = async () => {
     );
   }
 };
+
+console.log(upComingMovies);
+console.log(searchMovies);
+console.log(baseImagePath);
 
 const getUpComingMovieList = async () => {
   try {
