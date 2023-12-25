@@ -211,7 +211,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    minHeight: '100%',
     backgroundColor: COLORS.Black,
   },
   scrollViewContainer: {

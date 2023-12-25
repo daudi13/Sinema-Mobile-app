@@ -32,16 +32,14 @@ const SearchScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
+      <View style={styles.InputHeaderContainer}>
+        <InputHeader searchFunction={searchFunction} />
+      </View>
       <View>
         <FlatList
           data={searchList}
           keyExtractor={(item: any) => item.id}
           numColumns={2}
-          ListHeaderComponent={
-            <View style={styles.InputHeaderContainer}>
-              <InputHeader searchFunction={searchFunction} />
-            </View>
-          }
           contentContainerStyle={styles.centerContainer}
           renderItem={({item, index}) => (
             <SubMovieCard
@@ -76,6 +74,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginHorizontal: SPACING.space_36,
     marginTop: SPACING.space_28,
+    marginBottom: SPACING.space_32,
   },
   centerContainer: {
     alignItems: 'center',
