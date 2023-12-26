@@ -8,22 +8,9 @@ import {
   SPACING,
 } from '../theme/theme';
 import CustomIcon from './CustomIcon';
+import {genreName} from '../extraFunc/extraFunc';
 
 const MovieCard = (props: any) => {
-  const genreName = (genres: any) => {
-    const genreArr = props.genreList;
-    let arr = [];
-    for (let i = 0; i < genres.length; i++) {
-      for (let j = 0; j < genreArr?.length; j++) {
-        if (genres[i] === genreArr[j].id) {
-          arr.push(genreArr[j].name);
-        }
-      }
-    }
-    return arr;
-  };
-
-  genreName(props.genreId);
   return (
     <TouchableOpacity onPress={props.cardFunction}>
       <View
@@ -53,7 +40,7 @@ const MovieCard = (props: any) => {
           {props.title}
         </Text>
         <View style={styles.genreContainer}>
-          {genreName(props.genreId)
+          {genreName(props.genreId, props.genreList)
             .slice(1, 4)
             .map((item: any, index: any) => (
               <Text style={styles.genreItem} key={index}>
