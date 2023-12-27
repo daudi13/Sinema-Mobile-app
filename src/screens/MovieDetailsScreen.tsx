@@ -22,9 +22,9 @@ import {
 import AppHeader from '../components/AppHeader';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomIcon from '../components/CustomIcon';
-import {genreName} from '../extraFunc/extraFunc';
 import CategroryHeader from '../components/CategroryHeader';
 import CastCard from '../components/CastCard';
+import {generateStringDate} from '../extraFunc/extraFunc';
 
 const getMovieDetails = async (movieId: number) => {
   try {
@@ -134,7 +134,11 @@ const MovieDetailsScreen = ({navigation, route}: any) => {
             {movieData?.vote_average.toFixed(1)} ({movieData?.vote_count})
           </Text>
         </View>
-        <Text style={styles.releaseDate}>{movieData?.release_date}</Text>
+        <Text style={styles.releaseDate}>
+          {movieData == undefined
+            ? 'loading ...'
+            : generateStringDate(movieData?.release_date)}
+        </Text>
       </View>
       <Text style={styles.overview}>{movieData?.overview}</Text>
       <View style={styles.topCastContainer}>
