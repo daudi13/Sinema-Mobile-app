@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   appHeaderContainer: {
-    marginHorizontal: SPACING.space_36,
+    marginHorizontal: SPACING.space_24,
     marginTop: SPACING.space_20 * 2,
   },
   imageBg: {

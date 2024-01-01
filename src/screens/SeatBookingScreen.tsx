@@ -25,7 +25,15 @@ const generateDate = (): {date: number; day: string}[] => {
   return weekdays;
 };
 
-const generateSeats = (): void => {};
+const generateSeats = () => {
+  let numRow = 8;
+  let numColumn = 3;
+  let rowArray = [];
+  let start = 1;
+  let reachNine = false;
+
+  for (let i = 0; i)
+};
 
 const SeatBookingScreen = () => {
   const [dateArr, setDateArr] = useState<{date: number; day: string}[]>(
