@@ -238,6 +238,17 @@ const SeatBookingScreen = ({navigation, route}: any) => {
           }}
         />
       </View>
+      <View style={styles.bottomFooter}>
+        <View style={styles.priceSection}>
+          <Text style={styles.pricePlaceholder}>Total Price</Text>
+          <Text style={styles.priceText}>$ {price}.00</Text>
+        </View>
+        <TouchableOpacity
+          style={styles.buyTickets}
+          onPress={() => navigation.navigate('Ticket')}>
+          <Text style={styles.buyText}>Buy Tickets</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -354,5 +365,39 @@ const styles = StyleSheet.create({
   },
   timeText: {
     color: COLORS.White,
+  },
+  bottomFooter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: SPACING.space_36,
+    marginHorizontal: SPACING.space_36,
+  },
+  priceSection: {
+    alignItems: 'center',
+  },
+  pricePlaceholder: {
+    color: COLORS.whiteRGBA15,
+    fontFamily: FONTFAMILY.poppins_regular,
+    fontSize: FONTSIZE.size_18,
+  },
+  priceText: {
+    color: COLORS.White,
+    fontFamily: FONTFAMILY.poppins_regular,
+    fontSize: FONTSIZE.size_30,
+  },
+  buyTickets: {
+    width: SPACING.space_16 * 10,
+    height: SPACING.space_36 + 10,
+    backgroundColor: COLORS.Orange,
+    borderRadius: BORDERADIUS.radius_20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buyText: {
+    color: 'white',
+    fontSize: FONTSIZE.size_16,
+    fontFamily: FONTFAMILY.poppins_semibold,
   },
 });
