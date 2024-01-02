@@ -1,4 +1,5 @@
 import {
+  FlatList,
   ImageBackground,
   ScrollView,
   StatusBar,
@@ -8,7 +9,13 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import {
+  BORDERADIUS,
+  COLORS,
+  FONTFAMILY,
+  FONTSIZE,
+  SPACING,
+} from '../theme/theme';
 import LinearGradient from 'react-native-linear-gradient';
 import AppHeader from '../components/AppHeader';
 import CustomIcon from '../components/CustomIcon';
@@ -71,9 +78,7 @@ const generateSeats = () => {
 };
 
 const SeatBookingScreen = ({navigation, route}: any) => {
-  const [dateArr, setDateArr] = useState<{date: number; day: string}[]>(
-    generateDate(),
-  );
+  const [dateArr, setDateArr] = useState<any[]>(generateDate());
   const [selectedDateIndex, setSelectedDateIndex] = useState<any>();
   const [price, setPrice] = useState<number>(0);
   const [twoDSeatArray, setTwoDSeatArray] = useState<any[][]>(generateSeats());
@@ -175,6 +180,64 @@ const SeatBookingScreen = ({navigation, route}: any) => {
           <Text style={styles.radioIconText}>Selected seat</Text>
         </View>
       </View>
+      <View style={styles.datesWrapper}>
+        <FlatList
+          data={dateArr}
+          keyExtractor={item => item.date}
+          horizontal
+          contentContainerStyle={styles.containerGap24}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity onPress={() => setSelectedDateIndex(index)}>
+                <View
+                  style={[
+                    styles.dateContainer,
+                    index == 0
+                      ? {marginLeft: SPACING.space_24}
+                      : index == dateArr.length - 1
+                      ? {marginRight: SPACING.space_24}
+                      : {},
+                    index == selectedDateIndex
+                      ? {backgroundColor: COLORS.Orange}
+                      : {},
+                  ]}>
+                  <Text style={styles.dateText}>{item.date}</Text>
+                  <Text style={styles.dayText}>{item.day}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+      <View>
+        <FlatList
+          data={timeArray}
+          keyExtractor={item => item}
+          horizontal
+          bounces={false}
+          contentContainerStyle={styles.containerGap24}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity onPress={() => setSelectedTimeIndex(index)}>
+                <View
+                  style={[
+                    styles.timeContainer,
+                    index == 0
+                      ? {marginLeft: SPACING.space_24}
+                      : index == dateArr.length - 1
+                      ? {marginRight: SPACING.space_24}
+                      : {},
+                    index == selectedTimeIndex
+                      ? {backgroundColor: COLORS.Orange}
+                      : {},
+                  ]}>
+                  <Text style={styles.timeText}>{item}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -255,5 +318,41 @@ const styles = StyleSheet.create({
   },
   radioIconOrange: {
     color: COLORS.Orange,
+  },
+  containerGap24: {
+    gap: SPACING.space_24,
+  },
+  datesWrapper: {
+    marginVertical: SPACING.space_32,
+  },
+  dateContainer: {
+    width: SPACING.space_10 * 7,
+    height: SPACING.space_10 * 10,
+    borderRadius: BORDERADIUS.radius_10 * 10,
+    backgroundColor: COLORS.Grey,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  dateText: {
+    color: COLORS.White,
+    fontFamily: FONTFAMILY.poppins_regular,
+    fontSize: FONTSIZE.size_30,
+  },
+  dayText: {
+    color: COLORS.White,
+    fontFamily: FONTFAMILY.poppins_regular,
+  },
+  timeContainer: {
+    height: SPACING.space_32 + 5,
+    width: SPACING.space_36 * 2 + 6,
+    backgroundColor: COLORS.Grey,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: COLORS.White,
+    borderWidth: 1,
+    borderRadius: BORDERADIUS.radius_25 + 6,
+  },
+  timeText: {
+    color: COLORS.White,
   },
 });
