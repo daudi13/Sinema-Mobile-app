@@ -105,8 +105,20 @@ const SeatBookingScreen = ({navigation, route}: any) => {
       setTwoDSeatArray(temp);
     }
   };
+  const BookSeats = async () => {
+    if (
+      selectedSeatArray.length !== 0 &&
+      timeArray[selectedTimeIndex] != undefined &&
+      dateArr[selectedDateIndex] != undefined
+    ) {
+    }
+  };
 
-  console.log(JSON.stringify(twoDSeatArray, null, 2));
+  const btnFalse =
+    selectedSeatArray.length == 0 ||
+    timeArray[selectedTimeIndex] == undefined ||
+    dateArr[selectedDateIndex] == undefined;
+
   return (
     <ScrollView
       style={styles.container}
@@ -244,9 +256,12 @@ const SeatBookingScreen = ({navigation, route}: any) => {
           <Text style={styles.priceText}>$ {price}.00</Text>
         </View>
         <TouchableOpacity
-          style={styles.buyTickets}
+          disabled={btnFalse}
+          style={[styles.buyTickets, btnFalse && styles.btnInActive]}
           onPress={() => navigation.navigate('Ticket')}>
-          <Text style={styles.buyText}>Buy Tickets</Text>
+          <Text style={[styles.buyText, btnFalse && styles.btnTextInactive]}>
+            Buy Tickets
+          </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -399,5 +414,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: FONTSIZE.size_16,
     fontFamily: FONTFAMILY.poppins_semibold,
+  },
+  btnInActive: {
+    backgroundColor: COLORS.Grey,
+  },
+  btnTextInactive: {
+    color: COLORS.whiteRGBA15,
   },
 });
