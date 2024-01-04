@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,6 +20,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import AppHeader from '../components/AppHeader';
 import CustomIcon from '../components/CustomIcon';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const timeArray: string[] = [
   '10.30',
@@ -111,13 +113,35 @@ const SeatBookingScreen = ({navigation, route}: any) => {
       timeArray[selectedTimeIndex] != undefined &&
       dateArr[selectedDateIndex] != undefined
     ) {
+      try {
+        await EncryptedStorage.setItem(
+          'ticket',
+          JSON.stringify({
+            seatArray: selectedSeatArray,
+            time: timeArray[selectedTimeIndex],
+            date: dateArr[selectedDateIndex],
+            ticketImage: route.params?.posterImage,
+          }),
+        );
+      } catch (error) {
+        console.error(
+          'Something went wrong while storing in BookSeat function',
+        );
+      }
+      navigation.navigate('Ticket', {
+        seatArray: selectedSeatArray,
+        time: timeArray[selectedTimeIndex],
+        date: dateArr[selectedDateIndex],
+        ticketImage: route.params?.posterImage,
+      });
+    } else {
+      ToastAndroid.showWithGravity(
+        'Please select seats, Dates and time of the Movie',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
     }
   };
-
-  const btnFalse =
-    selectedSeatArray.length == 0 ||
-    timeArray[selectedTimeIndex] == undefined ||
-    dateArr[selectedDateIndex] == undefined;
 
   return (
     <ScrollView
@@ -255,13 +279,8 @@ const SeatBookingScreen = ({navigation, route}: any) => {
           <Text style={styles.pricePlaceholder}>Total Price</Text>
           <Text style={styles.priceText}>$ {price}.00</Text>
         </View>
-        <TouchableOpacity
-          disabled={btnFalse}
-          style={[styles.buyTickets, btnFalse && styles.btnInActive]}
-          onPress={() => navigation.navigate('Ticket')}>
-          <Text style={[styles.buyText, btnFalse && styles.btnTextInactive]}>
-            Buy Tickets
-          </Text>
+        <TouchableOpacity style={styles.buyTickets} onPress={() => BookSeats()}>
+          <Text style={styles.buyText}>Buy Tickets</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

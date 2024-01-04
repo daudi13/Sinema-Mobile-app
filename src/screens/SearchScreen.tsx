@@ -28,7 +28,6 @@ const SearchScreen = ({navigation}: any) => {
     }
   };
 
-  console.log(searchFunction('avengers'));
   return (
     <View style={styles.container}>
       <StatusBar hidden />
