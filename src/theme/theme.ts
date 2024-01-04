@@ -127,3 +127,37 @@ export const BORDERADIUS: BorderRadius = {
   radius_20: 20,
   radius_25: 25,
 };
+
+type IOptions = {
+  title: string;
+  subOne: string;
+  subTwo: string;
+  link: string;
+}[];
+
+export const optionsData: IOptions = [
+  {
+    title: 'Account',
+    subOne: 'Edit Profile',
+    subTwo: 'Change Profile',
+    link: '',
+  },
+  {
+    title: 'Settings',
+    subOne: 'Theme',
+    subTwo: 'Permissions',
+    link: '',
+  },
+  {
+    title: 'Offers & Referrals',
+    subOne: 'Offers',
+    subTwo: 'Referrals',
+    link: '',
+  },
+  {
+    title: 'About',
+    subOne: 'About Movies',
+    subTwo: 'More',
+    link: '',
+  },
+];
