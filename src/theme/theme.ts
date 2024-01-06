@@ -132,6 +132,7 @@ type IOptions = {
   title: string;
   subOne: string;
   subTwo: string;
+  icon: string;
   link: string;
 }[];
 
@@ -140,24 +141,28 @@ export const optionsData: IOptions = [
     title: 'Account',
     subOne: 'Edit Profile',
     subTwo: 'Change Profile',
+    icon: 'user',
     link: '',
   },
   {
     title: 'Settings',
     subOne: 'Theme',
     subTwo: 'Permissions',
+    icon: 'setting',
     link: '',
   },
   {
     title: 'Offers & Referrals',
     subOne: 'Offers',
     subTwo: 'Referrals',
+    icon: 'dollar',
     link: '',
   },
   {
     title: 'About',
     subOne: 'About Movies',
     subTwo: 'More',
+    icon: 'info',
     link: '',
   },
 ];

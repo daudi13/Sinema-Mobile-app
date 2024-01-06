@@ -41,6 +41,7 @@ const UserAccountScreen = ({navigation}: any) => {
               key={index}
               title={item.title}
               subOne={item.subOne}
+              icon={item.icon}
               subTwo={item.subTwo}
               link={item.link}
             />

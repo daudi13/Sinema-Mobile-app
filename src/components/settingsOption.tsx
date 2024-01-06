@@ -6,7 +6,7 @@ import {COLORS, FONTSIZE, FONTFAMILY} from '../theme/theme';
 const SettingsOption = (props: any) => {
   return (
     <TouchableOpacity style={styles.optionsBox}>
-      <CustomIcon name="user" style={styles.iconStyle} />
+      <CustomIcon name={props.icon} style={styles.iconStyle} />
       <View style={styles.desc}>
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.subTitle}>{props.subOne}</Text>
