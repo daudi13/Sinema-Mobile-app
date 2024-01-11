@@ -1,4 +1,4 @@
-# Portfolio v2.0
+# Sinema Mobile app v1.0
 
 Introducing Sinema, a cutting-edge mobile app that stands as a testament to my front-end development prowess. Crafted with React Native and TypeScript, this movie app seamlessly blends technology and aesthetics to deliver a captivating user experience. The fusion of TypeScript and carefully chosen React Native libraries ensures not just functionality but an elegant and efficient execution. Explore the world of cinema through a lens of innovation, showcasing the power of React Native and my commitment to pushing the boundaries of front-end development.
 
